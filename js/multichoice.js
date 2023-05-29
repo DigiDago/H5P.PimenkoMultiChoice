@@ -47,12 +47,12 @@ var H5P = H5P || {};
  * @param {Options} options
  * @param {number} contentId
  * @param {Object} contentData
- * @returns {H5P.MultiChoice}
+ * @returns {H5P.PimenkoMultiChoice}
  * @constructor
  */
-H5P.MultiChoice = function (options, contentId, contentData) {
-  if (!(this instanceof H5P.MultiChoice))
-    return new H5P.MultiChoice(options, contentId, contentData);
+H5P.PimenkoMultiChoice = function (options, contentId, contentData) {
+  if (!(this instanceof H5P.PimenkoMultiChoice))
+    return new H5P.PimenkoMultiChoice(options, contentId, contentData);
   var self = this;
   this.contentId = contentId;
   this.contentData = contentData;
@@ -80,6 +80,7 @@ H5P.MultiChoice = function (options, contentId, contentData) {
       checkAnswerButton: 'Check',
       submitAnswerButton: 'Submit',
       showSolutionButton: 'Show solution',
+      solutionCustomText: null,
       tryAgainButton: 'Try again',
       scoreBarLabel: 'You got :num out of :total points',
       tipAvailable: "Tip available",
@@ -243,8 +244,8 @@ H5P.MultiChoice = function (options, contentId, contentData) {
         html: '<div class="h5p-alternative-container"><span class="h5p-alternative-inner">' + answer.text + '</span></div>',
         appendTo: $myDom
       });
-    }  
-    
+    }
+
     self.setContent($myDom, {
       'class': params.behaviour.singleAnswer ? 'h5p-radio' : 'h5p-check'
     });
@@ -651,12 +652,20 @@ H5P.MultiChoice = function (options, contentId, contentData) {
 
     // Show solution button
     self.addButton('show-solution', params.UI.showSolutionButton, function () {
+
       if (params.behaviour.showSolutionsRequiresInput && !self.getAnswerGiven(true)) {
         // Require answer before solution can be viewed
         self.updateFeedbackContent(params.UI.noInput);
         self.read(params.UI.noInput);
       }
       else {
+        // Show custome solution text.
+        var htmlcontentsolutiontext = document.createElement('div');
+        htmlcontentsolutiontext.innerHTML = params.UI.solutionCustomText;
+
+        var htmlcontent = "<div class='h5p-question-solutioncustomtext'>" + htmlcontentsolutiontext.textContent + "</div>";
+        self.updateFeedbackContent(htmlcontent);
+
         calcScore();
         self.showAllSolutions();
       }
@@ -820,7 +829,7 @@ H5P.MultiChoice = function (options, contentId, contentData) {
       'tabindex': '-1'
     }).removeAttr('role')
       .removeAttr('aria-checked');
-    
+
     $('.h5p-answers').removeAttr('role');
   };
 
@@ -1057,9 +1066,9 @@ H5P.MultiChoice = function (options, contentId, contentData) {
     }
   }
 
-  H5P.MultiChoice.counter = (H5P.MultiChoice.counter === undefined ? 0 : H5P.MultiChoice.counter + 1);
+  H5P.PimenkoMultiChoice.counter = (H5P.PimenkoMultiChoice.counter === undefined ? 0 : H5P.PimenkoMultiChoice.counter + 1);
   params.role = (params.behaviour.singleAnswer ? 'radiogroup' : 'group');
-  params.labelId = 'h5p-mcq' + H5P.MultiChoice.counter;
+  params.labelId = 'h5p-mcq' + H5P.PimenkoMultiChoice.counter;
 
   /**
    * Pack the current state of the interactivity into a object that can be
@@ -1103,5 +1112,5 @@ H5P.MultiChoice = function (options, contentId, contentData) {
   };
 };
 
-H5P.MultiChoice.prototype = Object.create(H5P.Question.prototype);
-H5P.MultiChoice.prototype.constructor = H5P.MultiChoice;
+H5P.PimenkoMultiChoice.prototype = Object.create(H5P.Question.prototype);
+H5P.PimenkoMultiChoice.prototype.constructor = H5P.PimenkoMultiChoice;

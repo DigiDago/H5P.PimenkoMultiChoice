@@ -232,6 +232,33 @@
         "default": "Submit"
       },
       {
+        "name": "solutionCustomText",
+        "label": "Text for add a solution custom",
+        "type": "text",
+        "widget": "html",
+        "importance": "low",
+        "default": "",
+        "tags": [
+          "strong",
+          "em",
+          "p",
+          "h1",
+          "h2",
+          "h3",
+          "sub",
+          "sup",
+          "u",
+          "strike",
+          "ul",
+          "ol",
+          "blockquote",
+          "a",
+          "table",
+          "hr",
+          "code"
+        ]
+      },
+      {
         "name": "showSolutionButton",
         "type": "text",
         "label": "Show solution button label",

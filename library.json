@@ -1,14 +1,14 @@
 {
-  "title": "Multiple Choice",
+  "title": "Multiple Choice - pimenko version",
   "contentType": "Question",
   "majorVersion": 1,
-  "minorVersion": 16,
-  "patchVersion": 6,
+  "minorVersion": 2,
+  "patchVersion": 11,
   "runnable": 1,
   "embedTypes": [
     "iframe"
   ],
-  "machineName": "H5P.MultiChoice",
+  "machineName": "H5P.PimenkoMultiChoice",
   "author": "Joubel",
   "license": "MIT",
   "coreApi": {

@@ -1,6 +1,6 @@
 var H5PUpgrades = H5PUpgrades || {};
 
-H5PUpgrades['H5P.MultiChoice'] = (function () {
+H5PUpgrades['H5P.PimenkoMultiChoice'] = (function () {
   return {
     1: {
       1: {
